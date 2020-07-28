@@ -101,13 +101,3 @@ while game == "tic tac toe" or game == "continue":
     #if userinput is not valid ask for valid input
     while endgameinput != "exit" and endgameinput != "continue":
         endgameinput= input('Type either "exit" or "continue"')
-    
-    
-
-        
-
-        
-                            
-        
-        
-        
