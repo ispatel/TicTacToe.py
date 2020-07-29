@@ -2,11 +2,19 @@ import random
 import sys
 print("Tic Tac Toe")
 #asks user if the want to play game
-game = input('If you want to play tic tac toe then type "tic tac toe": ')
+i = True
+while i == True:
+    try:
+        game = input('If you want to play tic tac toe then type "tic tac toe": ')
+        assert game == "tic tac toe" or game == "continue"
+    except(AssertionError):
+        print("try again")
+        continue
+    i = False
 #if user enters an invalid response ask them to enter a valid response
-while game != "tic tac toe" and game != "continue":
+'''while game != "tic tac toe" and game != "continue":
     print("This program does not support that game yet")
-    game = input('If you want to play tic tac toe then type "tic tac toe": ')
+    game = input('If you want to play tic tac toe then type "tic tac toe": ')'''
 #program starts when user enters valid response
 while game == "tic tac toe" or game == "continue":
     print("How to play: ")
