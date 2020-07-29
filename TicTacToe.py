@@ -2,6 +2,7 @@ import random
 import sys
 print("Tic Tac Toe")
 #asks user if the want to play game
+#if user enters an invalid response ask them to enter a valid response
 i = True
 while i == True:
     try:
@@ -11,10 +12,6 @@ while i == True:
         print("try again")
         continue
     i = False
-#if user enters an invalid response ask them to enter a valid response
-'''while game != "tic tac toe" and game != "continue":
-    print("This program does not support that game yet")
-    game = input('If you want to play tic tac toe then type "tic tac toe": ')'''
 #program starts when user enters valid response
 while game == "tic tac toe" or game == "continue":
     print("How to play: ")
@@ -54,9 +51,18 @@ while game == "tic tac toe" or game == "continue":
             return True
     #checks if the board is full
     def fullBoard(board):
-        if board[0]!="_" and board[1]!="_" and board[2]!="_" and board[3]!="_" and board[4]!="_" and board[5]!="_" and board[6]!="_" and board[7]!="_" and board[8]!="_":
+        '''for i in range(len(board)):
+            if board[i] == '_':
+                return False
+        return True
+                
+        if board[0:8] != list('_'*8):
             print("It is a draw")
-            return True
+            return True'''
+        blank_space = board.count('_')
+        if blank_space == 0:
+            print('It\'s a draw')
+            return True 
     #laying out variables needed within the game itself
     gamerun = True
     x_spaces = []
@@ -64,17 +70,24 @@ while game == "tic tac toe" or game == "continue":
     board = ["_","_","_","_","_","_","_","_","_"]
     while gamerun == True:
         #asks user for where to mark the X
-        x_move = int(input("Where do you want to mark your X? "))
+        j = True
+        while j == True: 
+            try: 
+                x_move = int(input("Where do you want to mark your X? "))
+                assert board[x_move] == "_"
+            except(ValueError):
+                print('Enter a number from 0-8')
+                continue
+            except(IndexError):
+                print('Enter a number from 0-8')
+                continue
+            except(AssertionError):
+                print('That spot has already been taken')
+                continue
+            break
         #check if user input is valid
         #if user input is not valid ask for valid input
-        while x_move > 8:
-            x_move = int(input("Enter a number 0-8: "))
-        while board[x_move] != "_":
-            x_move = int(input("Pick a spot that has not been taken? "))
-            while x_move > 8:
-                x_move = int(input("Enter a number 0-8: "))
-        if board[x_move] == "_":
-            x_spaces.append(x_move)
+        x_spaces.append(x_move)
         printBoard(x_spaces,o_spaces)
         print("++++++++++++++++++++")
         #checks if either "O" or "X" have won
@@ -85,6 +98,7 @@ while game == "tic tac toe" or game == "continue":
             break
         #produces random spot for the computer to place the O
         o_move = random.randrange(9)
+        
         #checks if spot is availabe.
         #if spot is not availabe then computer randomly chooses different spot
         while board[o_move] != "_" or o_move==x_move:
