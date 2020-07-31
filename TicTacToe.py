@@ -51,17 +51,9 @@ while game == "tic tac toe" or game == "continue":
             return True
     #checks if the board is full
     def fullBoard(board):
-        '''for i in range(len(board)):
-            if board[i] == '_':
-                return False
-        return True
-                
-        if board[0:8] != list('_'*8):
-            print("It is a draw")
-            return True'''
         blank_space = board.count('_')
         if blank_space == 0:
-            print('It\'s a draw')
+            print('It\'s a draw!')
             return True 
     #laying out variables needed within the game itself
     gamerun = True
